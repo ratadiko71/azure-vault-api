@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 class KeyVaultController {
         @Value(value = "${keyVaultName}")
         private String keyVaultName;
-        @Value(value = "${userAssignedclientId}")
-        private String userAssignedclientId;
 
 
 

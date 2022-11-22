@@ -25,26 +25,10 @@ class KeyVaultController {
         public  Secret getSecret(@RequestParam(value = "secretKey") String secretKey) {
                 String keyVaultUri = "https://" + keyVaultName + ".vault.azure.net";
 
-//                ManagedIdentityCredential managedIdentityCredential = new ManagedIdentityCredentialBuilder().build();
                 DefaultAzureCredential defaultAzureCredential = new DefaultAzureCredentialBuilder().build();
                 SecretClient secretClient = new SecretClientBuilder()
                         .vaultUrl(keyVaultUri)
                         .credential(defaultAzureCredential)
-                        .buildClient();
-                String secretValue = secretClient
-                        .getSecret(secretKey)
-                        .getValue();
-                return new Secret(secretKey, secretValue);
-        }
-        @GetMapping("/getSecretLocal")
-        public  Secret getSecretLocal(@RequestParam(value = "secretKey") String secretKey) {
-                String keyVaultUri = "https://" + keyVaultName + ".vault.azure.net";
-
-                ManagedIdentityCredential managedIdentityCredential = new ManagedIdentityCredentialBuilder().build();
-//                DefaultAzureCredential defaultAzureCredential = new DefaultAzureCredentialBuilder().managedIdentityClientId(userAssignedclientId).build();
-                SecretClient secretClient = new SecretClientBuilder()
-                        .vaultUrl(keyVaultUri)
-                        .credential(managedIdentityCredential)
                         .buildClient();
                 String secretValue = secretClient
                         .getSecret(secretKey)
